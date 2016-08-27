@@ -55,12 +55,10 @@ function MenuBarMapIconCustomizier.OnAddOnLoaded(event, addonName)
     -- Filter addon's by name.
     if addonName == MenuBarMapIconCustomizier.name then
 		-- Here we have a question. Is there an event that Ingame menu appears (inventory/map/others...)
-		EVENT_MANAGER:RegisterForUpdate(MenuBarMapIconCustomizier.name, 100, tryHideIfExists)
-		EVENT_MANAGER:RegisterForEvent(MenuBarMapIconCustomizier.name, EVENT_GAME_CAMERA_UI_MODE_CHANGED, tryHideIfExists)
-		EVENT_MANAGER:RegisterForEvent(MenuBarMapIconCustomizier.name, EVENT_NEW_MOVEMENT_IN_UI_MODE, tryHideIfExists)
-		EVENT_MANAGER:RegisterForEvent(MenuBarMapIconCustomizier.name, EVENT_VISUAL_LAYER_CHANGED, tryHideIfExists)
-		EVENT_MANAGER:RegisterForEvent(MenuBarMapIconCustomizier.name, EVENT_GAME_FOCUS_CHANGED, tryHideIfExists)
-
+		-- EVENT_MANAGER:RegisterForUpdate(MenuBarMapIconCustomizier.name, 100, tryHideIfExists)
+		-- EVENT_MANAGER:RegisterForEvent(MenuBarMapIconCustomizier.name, EVENT_GAME_CAMERA_UI_MODE_CHANGED, tryHideIfExists)
+		local fragment = MAIN_MENU_KEYBOARD.categoryBarFragment
+		fragment:RegisterCallback("StateChange", tryHideIfExists)
 		-- addon initialized. No more needs to listen event.
         EVENT_MANAGER:UnregisterForEvent(MenuBarMapIconCustomizier.name, EVENT_ADD_ON_LOADED)
     end
